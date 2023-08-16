@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 const hostname = 'http://127.0.0.1';
 
 app.use(cors());
+app.use(express.json());
 
 app.use('/user', require('./routes/user.router'));
 
