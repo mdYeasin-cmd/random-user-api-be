@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('./../controllers/user.controller');
 const saveRouteValidator = require('../middleware/saveRouteValidator');
+const userIdValidator = require('../middleware/userIdValidator');
 
 router
     .route('/random')
@@ -17,6 +18,10 @@ router
 
 router
     .route('/update')
-    .patch();
+    .patch(userIdValidator, userController.updateAUser);
+
+router
+    .route('/delete')
+    .delete(userIdValidator, userController.deleteAUser);
 
 module.exports = router;
