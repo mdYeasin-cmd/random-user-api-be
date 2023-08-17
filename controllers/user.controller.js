@@ -133,4 +133,60 @@ exports.deleteAUser = (req, res) => {
             res.send("User deleted successfully");
         });
     });
+};
+
+exports.updateMultipleUser = (req, res) => {
+    const { ids, userList } = req.body;
+
+    fs.readFile(pathName, "utf-8", (err, data) => {
+        if (err) {
+            console.log("Error occur when try to read file (Lnie 41)");
+            res.send("Can't not read the file");
+        };
+
+        const parsedData = JSON.parse(data);
+
+        console.log(parsedData);
+
+        res.send("Done!");
+
+        // for (let id of ids) {
+        //     const willUpdateTheUser = parsedData.find(currentUser => currentUser.id === id);
+        //     for (const property in willUpdateTheUser) {
+        //         if (userProperty.includes(property)) {
+        //             willUpdateTheUser[property] = user[property]
+        //         }
+        //     }
+        // }
+
+        // if (willUpdateTheUser) {
+        //     for (const property in willUpdateTheUser) {
+        //         if (userProperty.includes(property)) {
+        //             willUpdateTheUser[property] = user[property]
+        //         }
+        //     }
+        // } else {
+        //     res.send("We can't find the user information");
+        // }
+
+        // check same isSameId
+        // const isSameId = parsedData.find(currentUser => currentUser.id === id);
+
+        // let newUserList;
+
+        // if (isSameId) {
+        //     newUserList = parsedData.filter(currentUser => currentUser.id !== id);
+        // } else {
+        //     res.send("This user data we not found here!!!");
+        // }
+
+        // fs.writeFile(pathName, JSON.stringify(newUserList, null, 4), (error) => {
+        //     if (error) {
+        //         console.log("An error has occurred when try to delete a user", error);
+        //         res.send("Can't write on this file");
+        //     }
+        //     console.log("Data written successfully to the file");
+        //     res.send("User deleted successfully");
+        // });
+    });
 }

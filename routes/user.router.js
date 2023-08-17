@@ -21,6 +21,11 @@ router
     .patch(userIdValidator, userController.updateAUser);
 
 router
+    .route('/bulk-update')
+    .patch(userController.updateMultipleUser);
+
+
+router
     .route('/delete')
     .delete(userIdValidator, userController.deleteAUser);
 
