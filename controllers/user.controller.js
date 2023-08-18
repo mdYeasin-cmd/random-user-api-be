@@ -29,8 +29,12 @@ exports.getAllUser = (req, res) => {
             res.send("Something wrong from the api endpoint");
         } else {
             const usersData = JSON.parse(data);
-            const limitedUserData = usersData.splice(0, limit);
-            res.send(limitedUserData);
+            if (limit) {
+                const limitedUserData = usersData.splice(0, limit);
+                res.send(limitedUserData);
+            } else {
+                res.send(usersData);
+            }
         }
     });
 };
