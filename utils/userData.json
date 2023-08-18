@@ -2,8 +2,8 @@
     {
         "id": 3,
         "gender": "Male",
-        "name": "Faisal Alam Dihan",
-        "contact": "018XXXXXXXX",
+        "name": "Yeasin",
+        "contact": "01568033765",
         "address": "Dhaka",
         "photoUrl": "https://i.ibb.co/7r9PFjQ/faisal.jpg"
     },
@@ -12,7 +12,7 @@
         "gender": "Female",
         "name": "Safiya Nowrin",
         "contact": "018XXXXXXXX",
-        "address": "Chattogram",
+        "address": "Mohipal",
         "photoUrl": "https://i.ibb.co/qyNKGJS/nowrin.png"
     },
     {
@@ -26,33 +26,33 @@
     {
         "id": 6,
         "gender": "Male",
-        "name": "Shifat Famila",
+        "name": "Rakib",
         "contact": "01813768522",
-        "address": "Dhaka",
+        "address": "Mirsarai",
         "photoUrl": "https://i.ibb.co/WWqyjsc/ayman.jpg"
     },
     {
         "id": 7,
         "gender": "Male",
-        "name": "Shifat Famila",
+        "name": "Rakib",
         "contact": "01813768522",
-        "address": "Dhaka",
+        "address": "Mirsarai",
         "photoUrl": "https://i.ibb.co/px43mDv/sakib.jpg"
     },
     {
         "id": 8,
         "gender": "Male",
-        "name": "Mahtab Chowdhury",
+        "name": "Rakib",
         "contact": "018XXXXXXXX",
-        "address": "Dhaka",
+        "address": "Mirsarai",
         "photoUrl": "https://i.ibb.co/px43mDv/sakib.jpg"
     },
     {
         "id": 89,
         "gender": "Male",
-        "name": "Mahtab Chowdhury",
+        "name": "Rakib",
         "contact": "01813768522",
-        "address": "Dhaka",
+        "address": "Mirsarai",
         "photoUrl": "http://i.ibb.co/px43mDv/sakib.jpg"
     }
 ]

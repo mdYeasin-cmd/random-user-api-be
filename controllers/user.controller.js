@@ -5,6 +5,7 @@ const { getSingleRandomUser } = require('../utils/getRandomUser');
 // file path name (userData.json)
 const pathName = path.join(__dirname, '../utils/userData.json');
 
+// get random user api
 exports.getARandomUser = async (req, res) => {
     fs.readFile(pathName, 'utf8', (err, data) => {
         if (err) {
@@ -18,6 +19,7 @@ exports.getARandomUser = async (req, res) => {
     });
 };
 
+// get all user api
 exports.getAllUser = (req, res) => {
     const { limit } = req.query;
 
@@ -33,12 +35,13 @@ exports.getAllUser = (req, res) => {
     });
 };
 
+// save new user api
 exports.saveANewUser = (req, res) => {
     const user = req.body;
 
     fs.readFile(pathName, "utf-8", (err, data) => {
         if (err) {
-            console.log("Error occur when try to read file (Lnie 41)");
+            console.log("Error occur when try to read file");
             res.send("Can't not read the file");
         }
 
@@ -66,6 +69,7 @@ exports.saveANewUser = (req, res) => {
     });
 };
 
+// update a use api
 exports.updateAUser = (req, res) => {
     const user = req.body;
     const userProperty = Object.keys(user);
@@ -102,12 +106,13 @@ exports.updateAUser = (req, res) => {
     });
 };
 
+// delete user api
 exports.deleteAUser = (req, res) => {
     const { id } = req.body;
 
     fs.readFile(pathName, "utf-8", (err, data) => {
         if (err) {
-            console.log("Error occur when try to read file (Lnie 41)");
+            console.log("Error occur when try to read file");
             res.send("Can't not read the file");
         };
 
@@ -135,58 +140,43 @@ exports.deleteAUser = (req, res) => {
     });
 };
 
+// bulk-update api
 exports.updateMultipleUser = (req, res) => {
     const { ids, userList } = req.body;
 
     fs.readFile(pathName, "utf-8", (err, data) => {
         if (err) {
-            console.log("Error occur when try to read file (Lnie 41)");
+            console.log("Error occur when try to read file");
             res.send("Can't not read the file");
         };
 
         const parsedData = JSON.parse(data);
 
-        console.log(parsedData);
+        for (let id of ids) {
+            const willUpdateTheUser = parsedData.find(currentUser => currentUser.id === id);
+            for (user of userList) {
+                if (willUpdateTheUser.id === user.id) {
+                    for (property in willUpdateTheUser) {
+                        // here body validation added
+                        // if user send different property that will not update here
+                        // And also send response to user
+                        if (Object.keys(user).includes(property)) {
+                            willUpdateTheUser[property] = user[property]
+                        } else {
+                            res.send("Your sended property not exist in our current user!")
+                        }
+                    }
+                }
+            }
+        }
 
-        res.send("Done!");
-
-        // for (let id of ids) {
-        //     const willUpdateTheUser = parsedData.find(currentUser => currentUser.id === id);
-        //     for (const property in willUpdateTheUser) {
-        //         if (userProperty.includes(property)) {
-        //             willUpdateTheUser[property] = user[property]
-        //         }
-        //     }
-        // }
-
-        // if (willUpdateTheUser) {
-        //     for (const property in willUpdateTheUser) {
-        //         if (userProperty.includes(property)) {
-        //             willUpdateTheUser[property] = user[property]
-        //         }
-        //     }
-        // } else {
-        //     res.send("We can't find the user information");
-        // }
-
-        // check same isSameId
-        // const isSameId = parsedData.find(currentUser => currentUser.id === id);
-
-        // let newUserList;
-
-        // if (isSameId) {
-        //     newUserList = parsedData.filter(currentUser => currentUser.id !== id);
-        // } else {
-        //     res.send("This user data we not found here!!!");
-        // }
-
-        // fs.writeFile(pathName, JSON.stringify(newUserList, null, 4), (error) => {
-        //     if (error) {
-        //         console.log("An error has occurred when try to delete a user", error);
-        //         res.send("Can't write on this file");
-        //     }
-        //     console.log("Data written successfully to the file");
-        //     res.send("User deleted successfully");
-        // });
+        fs.writeFile(pathName, JSON.stringify(parsedData, null, 4), (error) => {
+            if (error) {
+                console.log("An error has occurred when try to bulk update", error);
+                res.send("Can't write on this file");
+            }
+            console.log("Data written successfully to the file");
+            res.send("Bulk update completed!");
+        });
     });
-}
+};
